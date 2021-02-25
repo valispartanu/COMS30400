@@ -15,15 +15,30 @@ public class Player : NetworkBehaviour
         }
     }
 
-    public override void OnStartClient()
-    {
-        DontDestroyOnLoad(gameObject);
+    //public override void OnStartClient()
+    //{
+    //    DontDestroyOnLoad(gameObject);
+        
+    //    Room.GamePlayers.Add(this);
+    //    CmdAddPlayer(this);
+    //}
 
-        Room.GamePlayers.Add(this);
-    }
+    //public override void OnStopClient()
+    //{
+    //    Room.GamePlayers.Remove(this);
+    //    CmdRemovePlayer(this);
+    //}
 
-    public override void OnStopClient()
-    {
-        Room.GamePlayers.Remove(this);
-    }
+    //[Command]
+    //private void CmdAddPlayer(Player player)
+    //{
+        
+    //    Room.GamePlayers.Add(player);
+    //}
+
+    //[Command]
+    //private void CmdRemovePlayer(Player player)
+    //{
+    //    Room.GamePlayers.Remove(this);
+    //}
 }
