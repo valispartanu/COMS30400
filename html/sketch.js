@@ -151,7 +151,7 @@ function gotResult(error, results) {
   poseBuffer.push(buffPoseLabel);
   poseBuffer.shift();
 
-  console.log(poseBuffer);
+  //console.log(poseBuffer);
   var tempPoseLabel = getMode(poseBuffer);
 
   // Change displayed pose phrase
@@ -308,4 +308,40 @@ function draw() {
   text(poseSentence, 0, 0);
 
   image(overlay, 0, 0, canvas.width, canvas.height);
+}
+
+
+// Move canvas around on mouse click
+let onCanv = false;
+let xOrigin = 0;
+let yOrigin = 0;
+let xCanvOrigin = 0;
+let yCanvOrigin = 0;
+
+// Returns true if mouse is within bounds of canvas
+function mouseOnCanvas(){
+  return mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height;
+}
+
+// Sets all necessary variables when canvas is clicked on
+function mousePressed() {
+  if (mouseOnCanvas()) {
+    onCanv = true;
+    xOrigin = winMouseX;// - bx;
+    yOrigin = winMouseY;// - by;
+    xCanvOrigin = canvas.position().x;
+    yCanvOrigin = canvas.position().y;
+  }
+}
+
+// Updates canvas position by amount the mouse has moved since clicked
+function mouseDragged() {
+  if (onCanv) {
+    canvas.position(xCanvOrigin + (winMouseX - xOrigin), yCanvOrigin + (winMouseY - yOrigin))
+  }
+}
+
+
+function mouseReleased() {
+  onCanv = false;
 }
