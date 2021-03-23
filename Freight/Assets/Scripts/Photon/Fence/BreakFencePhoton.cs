@@ -76,7 +76,7 @@ public class BreakFencePhoton : MonoBehaviourPun
                 {
                     Vector3 spawnPosition = transform.position;
                     
-                    photonView.RPC("SetPressPToNotActive", player.GetComponent<PhotonView>().Owner);
+                    photonView.RPC(nameof(SetPressPToNotActive),  RpcTarget.All);
 
                     photonView.RPC("DestroyFence", RpcTarget.MasterClient);
                     PhotonNetwork.Instantiate("PhotonPrefabs/fence_simple_broken_open Variant 1", spawnPosition, Quaternion.Euler(0f, 90f, 0f));
