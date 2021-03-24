@@ -39,7 +39,23 @@ function setup() {
   video.hide();
 
   // init posenet
-  poseNet = ml5.poseNet(video, modelLoaded);
+
+  var optionsPose = {
+  architecture: 'ResNet50',
+  imageScaleFactor: 0.5,
+  outputStride: 16,
+  // flipHorizontal: false,
+  minConfidence: 0.2,
+  maxPoseDetections: 1,
+  scoreThreshold: 0.2,
+  // nmsRadius: 20,
+  // detectionType: 'single',
+  inputResolution: 161,
+  // multiplier: 1,
+  quantBytes: 1,
+};
+
+  poseNet = ml5.poseNet(video, optionsPose, modelLoaded);
   poseNet.on('pose', gotPoses);
 
   // init pose recognition
