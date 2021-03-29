@@ -93,7 +93,7 @@ public class PlayerAnimation : MonoBehaviourPun
         }
 
         if (!isWalking && z > 0.02f) {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) || PoseParser.GETGestureAsString().CompareTo("I") == 0)
             {
                 animator.SetBool(isRunningHash, true);
                 player.setSpeed(runningSpeed);
@@ -125,12 +125,12 @@ public class PlayerAnimation : MonoBehaviourPun
             animator.SetBool(isLeftHash, true);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (isWalking || z > 0.02f)) {
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || PoseParser.GETGestureAsString().CompareTo("I") == 0) && (isWalking || z > 0.02f)) {
             animator.SetBool(isWalkingHash, false);
             animator.SetBool(isRunningHash, true);
             player.setSpeed(runningSpeed);
 
-        } else if (Input.GetKeyUp(KeyCode.LeftShift) && isRunning) {
+        } else if (!Input.GetKey(KeyCode.LeftShift) && PoseParser.GETGestureAsString().CompareTo("I") != 0 && isRunning) {
             animator.SetBool(isWalkingHash, true);
             animator.SetBool(isRunningHash, false);
             player.setSpeed(walkingSpeed);
