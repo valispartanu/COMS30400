@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerGestureController : NetworkBehaviour
+public class PlayerGestureController : MonoBehaviourPun
 {
     public CharacterController character;
     public Transform characterTransform;
     private bool rotated = false;
     private Transform oldRotation;
     
-    [ClientCallback]
     void Start()
     {
-        if (!hasAuthority)
+        if (!photonView.IsMine)
         {
             return;
         }
@@ -21,10 +21,9 @@ public class PlayerGestureController : NetworkBehaviour
         characterTransform = gameObject.transform;
     }
 
-    [ClientCallback]
     void Update()
     {
-        if (!hasAuthority)
+        if (!photonView.IsMine)
         {
             return;
         }

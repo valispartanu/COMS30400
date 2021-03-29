@@ -143,9 +143,9 @@ public class PlayerAnimation : MonoBehaviourPun
             animator.SetBool(isJumpingHash, false);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouched) {
+        if ((Input.GetKeyDown(KeyCode.LeftControl) || PoseParser.GETGestureAsString().CompareTo("C") == 0) && !isCrouched) {
             animator.SetBool(isCrouchedHash, true);
-        } else if (Input.GetKeyUp(KeyCode.LeftControl) && isCrouched) {
+        } else if (!Input.GetKey(KeyCode.LeftControl) && PoseParser.GETGestureAsString().CompareTo("C") != 0 && isCrouched) {
             animator.SetBool(isCrouchedHash, false);
         }
 

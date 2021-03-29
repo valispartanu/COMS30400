@@ -79,7 +79,7 @@ namespace UnityTemplateProjects
         Vector3 GetInputTranslationDirection()
         {
             Vector3 direction = new Vector3();
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || PoseParser.GETGestureAsString().CompareTo("I") == 0)
             {
                 direction += Vector3.forward;
             }
