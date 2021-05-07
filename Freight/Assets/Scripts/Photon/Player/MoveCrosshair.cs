@@ -10,6 +10,8 @@ public class MoveCrosshair : MonoBehaviourPun
     private Vector2 origionalPosition;
 	private RectTransform crosshairTransform;
 
+	public GameObject handGrab;
+
 	// Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,13 @@ public class MoveCrosshair : MonoBehaviourPun
     {
 		if (!photonView.IsMine)
 			return;
-
+		// if hand empty, return
+		if(handGrab.transform.childCount==0){
+			return;
+		}
+		//if not a rock, just return
+		if(handGrab.transform.GetChild(0).GetComponent<Throwable>()==null) return;
+	
 	    Vector3 handPos = PoseParser.GETLeftHandPositionAsVector();
 	    // if confidence is over 90%
 	    if (handPos.z > 0.15)
@@ -40,6 +48,10 @@ public class MoveCrosshair : MonoBehaviourPun
 	    
 	    // Debug.Log("CROSSHAIR = " + crosshairTransform.anchoredPosition.ToString());
     }
+
+	public void ResetPosition(){
+		crosshairTransform.anchoredPosition = origionalPosition;
+	}
 
     public Vector3 GETCrosshairOffsetFromCentre()
     {
